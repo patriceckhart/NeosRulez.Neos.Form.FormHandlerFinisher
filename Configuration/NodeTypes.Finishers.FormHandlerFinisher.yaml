@@ -1,0 +1,19 @@
+'NeosRulez.Neos.Form.SaveToDatabaseFinisher:FormHandlerFinisher':
+  superTypes:
+    'Neos.Form.Builder:AbstractFinisher': true
+  ui:
+    label: 'Form handler finisher'
+    icon: 'fas fa-file-import'
+    inspector:
+      groups:
+        'finisher':
+          icon: 'fas fa-file-import'
+  properties:
+    endpoint:
+      type: string
+      ui:
+        label: 'Endpoint'
+        reloadPageIfChanged: true
+        inspector:
+          group: 'finisher'
+          position: 1

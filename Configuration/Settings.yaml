@@ -1,0 +1,39 @@
+Neos:
+  Neos:
+    fusion:
+      autoInclude:
+        NeosRulez.Neos.Form.FormHandlerFinisher: true
+    userInterface:
+      translation:
+        autoInclude:
+          NeosRulez.Neos.Form.FormHandlerFinisher:
+            - Modules
+    modules:
+      form:
+        label: NeosRulez.Neos.Form.FormHandlerFinisher:Modules:module_FormHandlerFinisher_label
+        controller: '\Neos\Neos\Controller\Module\ManagementController'
+        description: NeosRulez.Neos.Form.FormHandlerFinisher:Modules:module_FormHandlerFinisher_description
+        icon: 'fas fa-envelope'
+        resource: 'Neos_Neos_Backend_Module_Management'
+        submodules:
+          formdata:
+            label: NeosRulez.Neos.Form.FormHandlerFinisher:Modules:module_FormHandlerFinisher_formdata_label
+            controller: '\NeosRulez\Neos\Form\FormHandlerFinisher\Controller\FormDataController'
+            description: NeosRulez.Neos.Form.FormHandlerFinisher:Modules:module_FormHandlerFinisher_formdata_description
+            icon: 'fas fa-envelope-open-text'
+            actions:
+              index:
+                label: NeosRulez.Neos.Form.FormHandlerFinisher:Modules:module_FormHandlerFinisher_formdata_label
+                title: NeosRulez.Neos.Form.FormHandlerFinisher:Modules:module_FormHandlerFinisher_formdata_description
+  Form:
+    presets:
+      default:
+        finisherPresets:
+          'NeosRulez.Neos.Form.FormHandlerFinisher:FormHandlerFinisher':
+            implementationClassName: NeosRulez\Neos\Form\FormHandlerFinisher\Finishers\FormHandlerFinisher
+            options: { }
+      bootstrap:
+        finisherPresets:
+          'NeosRulez.Neos.Form.FormHandlerFinisher:FormHandlerFinisher':
+            implementationClassName: NeosRulez\Neos\Form\FormHandlerFinisher\Finishers\FormHandlerFinisher
+            options: {  }

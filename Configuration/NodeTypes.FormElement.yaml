@@ -1,0 +1,15 @@
+'Neos.Form.Builder:FormElement':
+  ui:
+    inspector:
+      groups:
+        formHandler:
+          label: Form handler
+          group: fas fa-file-import
+  properties:
+    formHandlerId:
+      type: string
+      ui:
+        label: 'ID (Form handler)'
+        reloadPageIfChanged: true
+        inspector:
+          group: formHandler
