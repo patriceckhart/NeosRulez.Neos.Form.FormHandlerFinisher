@@ -13,6 +13,7 @@ use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Annotations as Flow;
 use Neos\Form\Core\Model\AbstractFinisher;
 use Neos\Form\Exception\FinisherException;
+use Psr\Http\Message\UriFactoryInterface;
 
 /**
  * This finisher send values to pardot form handler
@@ -25,6 +26,12 @@ class FormHandlerFinisher extends AbstractFinisher
      * @var ContextFactoryInterface
      */
     protected $contextFactory;
+
+    /**
+     * @Flow\Inject
+     * @var UriFactoryInterface
+     */
+    protected $uriFactory;
 
     /**
      * Executes this finisher
@@ -43,9 +50,17 @@ class FormHandlerFinisher extends AbstractFinisher
 
         $node = $this->parseOption('node');
         $formParams = $this->getFormParams($this->getValues($formValues, $node));
-        \Neos\Flow\var_dump($formParams);
+//        \Neos\Flow\var_dump($formParams);
         $response = $this->sendRequest($formParams, $endpoint);
-        \Neos\Flow\var_dump($response);
+//        \Neos\Flow\var_dump($response);
+
+        $targetUri = '/';
+
+        $escapedUri = htmlentities($targetUri, ENT_QUOTES, 'utf-8');
+        $response = $formRuntime->getResponse();
+        $response->setContent('<html><head><meta http-equiv="refresh" content="0;url=' . $escapedUri . '"/></head></html>');
+        $response->setStatusCode('200');
+        $response->setRedirectUri($this->uriFactory->createUri((string) $targetUri));
     }
 
     /**
