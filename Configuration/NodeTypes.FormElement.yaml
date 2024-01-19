@@ -6,10 +6,17 @@
           label: Form handler
           group: fas fa-file-import
   properties:
-    formHandlerId:
+    fieldId:
       type: string
       ui:
         label: 'ID (Form handler)'
+        reloadPageIfChanged: true
+        inspector:
+          group: formHandler
+    fieldApiName:
+      type: string
+      ui:
+        label: 'API name'
         reloadPageIfChanged: true
         inspector:
           group: formHandler
