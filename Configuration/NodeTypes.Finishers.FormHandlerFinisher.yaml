@@ -1,4 +1,4 @@
-'NeosRulez.Neos.Form.SaveToDatabaseFinisher:FormHandlerFinisher':
+'NeosRulez.Neos.Form.FormHandlerFinisher:FormHandlerFinisher':
   superTypes:
     'Neos.Form.Builder:AbstractFinisher': true
   ui:

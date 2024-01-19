@@ -1,4 +1,4 @@
-prototype(NeosRulez.Neos.Form.SaveToDatabaseFinisher:FormHandlerFinisher.Definition) < prototype(Neos.Form.Builder:Finisher.Definition) {
+prototype(NeosRulez.Neos.Form.FormHandlerFinisher:FormHandlerFinisher.Definition) < prototype(Neos.Form.Builder:Finisher.Definition) {
     formElementType = 'NeosRulez.Neos.Form.FormHandlerFinisher:FormHandlerFinisher'
     options {
         endpoint = ${null}
