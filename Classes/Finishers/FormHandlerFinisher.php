@@ -51,9 +51,9 @@ class FormHandlerFinisher extends AbstractFinisher
         $node = $this->parseOption('node');
         $formParams = $this->getFormParams($this->getValues($formValues, $node));
 //        \Neos\Flow\var_dump($formParams);
-        $response = $this->sendRequest($formParams, $endpoint);
-//        \Neos\Flow\var_dump($response);
-
+        $this->sendRequest($formParams, $endpoint);
+////        \Neos\Flow\var_dump($response);
+//
         $targetUri = '/';
 
         $escapedUri = htmlentities($targetUri, ENT_QUOTES, 'utf-8');
@@ -87,7 +87,7 @@ class FormHandlerFinisher extends AbstractFinisher
     {
         $result['form_params'] = [];
         foreach ($formValues as $formValue) {
-            $result['form_params'][$formValue['formHandlerId']] = $formValue['value'];
+            $result['form_params'][$formValue['fieldApiName']] = $formValue['value'];
         }
         return $result;
     }
@@ -114,7 +114,7 @@ class FormHandlerFinisher extends AbstractFinisher
             } else {
                 $node = $context->getNodeByIdentifier($i);
             }
-            $formData[] = ['key' => $node->getProperty('label'), 'formHandlerId' => $node->getProperty('formHandlerId'), 'value' => $value];
+            $formData[] = ['key' => $node->getProperty('label'), 'fieldApiName' => $node->getProperty('fieldApiName'), 'value' => $value];
         }
         return $formData;
     }
