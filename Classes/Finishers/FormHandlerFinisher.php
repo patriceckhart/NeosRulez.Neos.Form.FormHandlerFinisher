@@ -89,7 +89,7 @@ class FormHandlerFinisher extends AbstractFinisher
     {
         $result = [];
         foreach ($formValues as $formValue) {
-            $result[$formValue['fieldName']] = $formValue['value'];
+            $result[$formValue['key']] = $formValue['value'];
         }
         return $result;
     }
