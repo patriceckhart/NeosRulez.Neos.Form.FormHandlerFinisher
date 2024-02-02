@@ -54,6 +54,8 @@ class FormHandlerFinisher extends AbstractFinisher
         $this->sendRequest($formParams, $endpoint);
 ////        \Neos\Flow\var_dump($response);
 //
+//        \Neos\Flow\var_dump($endpoint);
+//        \Neos\Flow\var_dump($formParams);
         $targetUri = '/';
 
         $escapedUri = htmlentities($targetUri, ENT_QUOTES, 'utf-8');
@@ -85,9 +87,9 @@ class FormHandlerFinisher extends AbstractFinisher
      */
     private function getFormParams(array $formValues): array
     {
-        $result['form_params'] = [];
+        $result = [];
         foreach ($formValues as $formValue) {
-            $result['form_params'][$formValue['fieldApiName']] = $formValue['value'];
+            $result[$formValue['fieldName']] = $formValue['value'];
         }
         return $result;
     }
