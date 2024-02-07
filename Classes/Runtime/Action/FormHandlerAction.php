@@ -5,9 +5,9 @@ namespace NeosRulez\Neos\Form\FormHandlerFinisher\Runtime\Action;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
-use Neos\Fusion\Form\Runtime\Domain\ActionInterface;
 use Neos\Fusion\Form\Runtime\Action\AbstractAction;
 use Neos\Flow\Mvc\ActionResponse;
+use Psr\Http\Message\StreamInterface;
 
 class FormHandlerAction extends AbstractAction
 {
@@ -19,24 +19,28 @@ class FormHandlerAction extends AbstractAction
         $formData = $this->options['formData'];
         $formParams = $this->getFormParams($formData);
         $endpointURl = $this->getEndpointUrl($formData);
+//        \Neos\Flow\var_dump($formParams);
+//        \Neos\Flow\var_dump($endpointURl);
         $this->sendRequest($formParams, $endpointURl);
+//        \Neos\Flow\var_dump($foo);
         return null;
     }
 
     /**
      * @param array $formParams
      * @param string $endpoint
-     * @return mixed
+     * @return StreamInterface
      */
-    private function sendRequest(array $formParams, string $endpoint): mixed
+    private function sendRequest(array $formParams, string $endpoint): StreamInterface
     {
         $client = new Client();
         $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded'
         ];
         $request = new Request('POST', $endpoint, $headers);
-        $res = $client->sendAsync($request, $formParams)->wait();
-        return json_decode($res->getBody());
+//        $res = $client->sendAsync($request, $formParams)->wait();
+        $res = $client->send($request, $formParams);
+        return $res->getBody();
     }
 
     /**
@@ -48,7 +52,7 @@ class FormHandlerAction extends AbstractAction
         $values = [];
         foreach ($formData as $itemKey => $item) {
             if($itemKey !== 'endpointUrl') {
-                $values[$itemKey] = $item;
+                $values[$itemKey] = (string) $item;
             }
         }
         return [
