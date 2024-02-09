@@ -5,6 +5,7 @@ namespace NeosRulez\Neos\Form\FormHandlerFinisher\Runtime\Action;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Neos\Flow\Exception;
 use Neos\Fusion\Form\Runtime\Action\AbstractAction;
 use Neos\Flow\Mvc\ActionResponse;
 use Psr\Http\Message\StreamInterface;
@@ -19,10 +20,7 @@ class FormHandlerAction extends AbstractAction
         $formData = $this->options['formData'];
         $formParams = $this->getFormParams($formData);
         $endpointURl = $this->getEndpointUrl($formData);
-//        \Neos\Flow\var_dump($formParams);
-//        \Neos\Flow\var_dump($endpointURl);
         $this->sendRequest($formParams, $endpointURl);
-//        \Neos\Flow\var_dump($foo);
         return null;
     }
 
@@ -38,8 +36,7 @@ class FormHandlerAction extends AbstractAction
             'Content-Type' => 'application/x-www-form-urlencoded'
         ];
         $request = new Request('POST', $endpoint, $headers);
-//        $res = $client->sendAsync($request, $formParams)->wait();
-        $res = $client->send($request, $formParams);
+        $res = $client->sendAsync($request, $formParams)->wait();
         return $res->getBody();
     }
 
