@@ -48,7 +48,7 @@ class FormHandlerAction extends AbstractAction
     {
         $values = [];
         foreach ($formData as $itemKey => $item) {
-            if($itemKey !== 'endpointUrl' && $itemKey !== 'nodeTitle') {
+            if($itemKey !== 'endpointUrl' && $itemKey !== 'nodeTitle' && !is_array($item)) {
                 $values[$itemKey] = (string) $item;
             }
         }
