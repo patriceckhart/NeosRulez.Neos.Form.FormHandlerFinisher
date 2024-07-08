@@ -48,8 +48,13 @@ class FormHandlerAction extends AbstractAction
     {
         $values = [];
         foreach ($formData as $itemKey => $item) {
-            if($itemKey !== 'endpointUrl' && $itemKey !== 'nodeTitle' && !is_array($item)) {
+            if($itemKey !== 'endpointUrl' && $itemKey !== 'nodeTitle' && !is_array($item) && $itemKey !== 'custom') {
                 $values[$itemKey] = (string) $item;
+            }
+            if($itemKey === 'custom' && is_array($item)) {
+                foreach ($item as $customFieldKey => $customField) {
+                    $values[$customFieldKey] = (string) $customField;
+                }
             }
         }
         return [
